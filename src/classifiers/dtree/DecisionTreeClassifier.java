@@ -58,9 +58,6 @@ class DecisionTreeClassifier {
 			btn.classId = pluralityValue(ex);
 			return btn;
 		}
-//		else if(isHomogenous(ex)){
-//			//return the homogenous class
-//		}
 		else{
 			//int sumOfDist = 0;
 			//double initial_entropy;
@@ -73,23 +70,7 @@ class DecisionTreeClassifier {
 			j = i + 1;
 			while(j < distribution.length && distribution[j] == 0)
 				j++;
-//			for(i = 0;i < distribution.length;i++){
-//				if(distribution[i] > 0){
-//					nnzIndexes.add(i);
-//					sumOfDist += distribution[i]; 
-//				}
-//			}
-//			if(nnzIndexes.size() == 1){
-//				//homogenous
-//			}
-//			else{
-//				//not homogenous
-//				for(int nnzi : nnzIndexes){
-//					distribution[nnzi] = distribution[nnzi] / sumOfDist;
-//					
-//				}
-//				int attId = findImportantAttribute(ex,att,distribution);
-//			}
+						
 			if(j == distribution.length){
 				//homogenous
 				btn.classId = i;
@@ -129,12 +110,6 @@ class DecisionTreeClassifier {
 		ArrayList<int[]> subsetDist = new ArrayList<int[]>();		//subset distribution
 		ArrayList<int[][]> classDist = new ArrayList<int[][]>();	//class distribution within subsets corresponding to each attribute
 		//allocate memory for stats
-		/*
-		for(i = 0;i < attributes.size();i++){
-			subsetDist.add(new int[in.attributeTypes[attributes.get(i)]]);
-			classDist.add(new int[in.attributeTypes[attributes.get(i)]][in.number_classes]);
-		}
-		*/
 		for(int att : attributes){
 			subsetDist.add(new int[in.uniqueAttributeValueSoFar[att]]);
 			classDist.add(new int[in.uniqueAttributeValueSoFar[att]][in.uniqueClassValueSoFar]);
@@ -148,14 +123,6 @@ class DecisionTreeClassifier {
 			}
 		}
 		
-		/*
-		for(int e : ex){
-			for(int att : attributes){
-				subsetDist.get(i)[in.instances.get(e)[attributes.get(i)]]++;
-				classDist.get(i)[in.instances.get(e)[attributes.get(i)]][in.actualClass.get(e)]++;
-			}
-		}
-		*/		
 		//normalize subsetDist values
 		//choose best attribute for split
 		for(i = 0;i < attributes.size();i++){
